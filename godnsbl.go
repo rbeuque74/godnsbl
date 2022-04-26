@@ -9,7 +9,6 @@ package godnsbl
 import (
 	"fmt"
 	"net"
-	"regexp"
 	"strings"
 )
 
@@ -154,11 +153,8 @@ func query(rbl string, host string, r *Result) {
 
 	res, err := net.LookupHost(lookup)
 	if len(res) > 0 {
-
 		for _, ip := range res {
-			m, _ := regexp.MatchString("^127.0.0.*", ip)
-
-			if m == true {
+			if strings.HasPrefix(ip, "127.0.0") {
 				r.Listed = true
 			}
 		}
@@ -172,8 +168,6 @@ func query(rbl string, host string, r *Result) {
 		r.Error = true
 		r.ErrorType = err
 	}
-
-	return
 }
 
 /*
