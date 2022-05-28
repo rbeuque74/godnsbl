@@ -16,7 +16,6 @@ import (
 Blacklists is the list of blackhole lists to check against
 */
 var Blacklists = []string{
-	"aspews.ext.sorbs.net",
 	"b.barracudacentral.org",
 	"bl.deadbeef.com",
 	"bl.emailbasura.org",
@@ -71,8 +70,6 @@ var Blacklists = []string{
 	"ricn.dnsbl.net.au",
 	"rmst.dnsbl.net.au",
 	"short.rbl.jp",
-	"smtp.dnsbl.sorbs.net",
-	"socks.dnsbl.sorbs.net",
 	"spam.abuse.ch",
 	"spam.dnsbl.sorbs.net",
 	"spam.rbl.msrbl.net",
@@ -87,10 +84,8 @@ var Blacklists = []string{
 	"virbl.bit.nl",
 	"virus.rbl.jp",
 	"virus.rbl.msrbl.net",
-	"web.dnsbl.sorbs.net",
 	"wormrbl.imp.ch",
-	"zen.spamhaus.org",
-	"zombie.dnsbl.sorbs.net"}
+	"zen.spamhaus.org"}
 
 /*
 RBLResults holds the results of the lookup.
