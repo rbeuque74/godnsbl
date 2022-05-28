@@ -58,7 +58,6 @@ var Blacklists = []string{
 	"osrs.dnsbl.net.au",
 	"owfs.dnsbl.net.au",
 	"owps.dnsbl.net.au",
-	"pbl.spamhaus.org",
 	"phishing.rbl.msrbl.net",
 	"probes.dnsbl.net.au",
 	"proxy.bl.gweep.ca",
@@ -71,7 +70,6 @@ var Blacklists = []string{
 	"residential.block.transip.nl",
 	"ricn.dnsbl.net.au",
 	"rmst.dnsbl.net.au",
-	"sbl.spamhaus.org",
 	"short.rbl.jp",
 	"smtp.dnsbl.sorbs.net",
 	"socks.dnsbl.sorbs.net",
@@ -91,7 +89,6 @@ var Blacklists = []string{
 	"virus.rbl.msrbl.net",
 	"web.dnsbl.sorbs.net",
 	"wormrbl.imp.ch",
-	"xbl.spamhaus.org",
 	"zen.spamhaus.org",
 	"zombie.dnsbl.sorbs.net"}
 
