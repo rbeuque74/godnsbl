@@ -7,6 +7,7 @@ JSON annotations on the types are provided as a convenience.
 package godnsbl
 
 import (
+	"context"
 	"fmt"
 	"net"
 	"strings"
@@ -106,13 +107,13 @@ func Reverse(ip net.IP) string {
 	return strings.Join(splitAddress, ".")
 }
 
-func query(rbl string, host string, r *Result) {
+func query(ctx context.Context, rbl string, host string, r *Result) {
 	r.Listed = false
 	r.Rbl = rbl
 
 	lookup := fmt.Sprintf("%s.%s", host, rbl)
 
-	res, err := net.LookupHost(lookup)
+	res, err := net.DefaultResolver.LookupHost(ctx, lookup)
 	if len(res) > 0 {
 		for _, ip := range res {
 			if strings.HasPrefix(ip, "127.0.0") {
@@ -120,7 +121,7 @@ func query(rbl string, host string, r *Result) {
 			}
 		}
 
-		txt, _ := net.LookupTXT(lookup)
+		txt, _ := net.DefaultResolver.LookupTXT(ctx, lookup)
 		if len(txt) > 0 {
 			r.Text = txt[0]
 		}
@@ -134,7 +135,7 @@ func query(rbl string, host string, r *Result) {
 /*
 Lookup performs the search and returns the RBLResults
 */
-func Lookup(rblList string, targetHost string) (r RBLResults) {
+func Lookup(ctx context.Context, rblList string, targetHost string) (r RBLResults) {
 	r.List = rblList
 	r.Host = targetHost
 
@@ -146,7 +147,7 @@ func Lookup(rblList string, targetHost string) (r RBLResults) {
 
 				addr := Reverse(addr)
 
-				query(rblList, addr, &res)
+				query(ctx, rblList, addr, &res)
 
 				r.Results = append(r.Results, res)
 			}
@@ -160,7 +161,7 @@ func Lookup(rblList string, targetHost string) (r RBLResults) {
 /*
 LookupIp performs the search on an IP address and returns the RBLResults
 */
-func LookupIp(rblList string, addr net.IP) (r RBLResults) {
+func LookupIp(ctx context.Context, rblList string, addr net.IP) (r RBLResults) {
 	r.List = rblList
 
 	if addr.To4() != nil {
@@ -169,7 +170,7 @@ func LookupIp(rblList string, addr net.IP) (r RBLResults) {
 
 		addr := Reverse(addr)
 
-		query(rblList, addr, &res)
+		query(ctx, rblList, addr, &res)
 
 		r.Results = append(r.Results, res)
 	}
