@@ -27,7 +27,8 @@ var Blacklists = []string{
 	"db.wpbl.info",
 	"dnsbl-1.uceprotect.net",
 	"dnsbl-2.uceprotect.net",
-	"dnsbl-3.uceprotect.net",
+	// OVH AS is blacklisted there
+	// "dnsbl-3.uceprotect.net",
 	"dnsbl.cyberlogic.net",
 	"dnsbl.dronebl.org",
 	"dnsbl.inps.de",
